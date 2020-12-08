@@ -1,0 +1,3 @@
+            ->editColumn('$RELATION_MODEL_PLURAL$', function ($$MODEL_NAME_CAMEL$) {
+                return getLinksColumn($$MODEL_NAME_CAMEL$->$RELATION_MODEL_PLURAL$,'$RELATION_MODEL_PLURAL$','id','$RELATION_MODEL_TITLE$');
+            })

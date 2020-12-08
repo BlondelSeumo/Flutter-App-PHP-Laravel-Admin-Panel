@@ -1,0 +1,252 @@
+/*
+ *
+ *
+ *
+ * Bootstrap 4 Component - Dropzone
+ * Version: 1.0.4
+ * Copyright (c) 2017-18 Martin Haubek
+ *
+ *
+ *
+ */
+@keyframes passing-through {
+    0% {
+        opacity: 0;
+        transform: translateY(40px); }
+    30%, 70% {
+        opacity: 1;
+        transform: translateY(0px); }
+    100% {
+        opacity: 0;
+        transform: translateY(-40px); } }
+
+@keyframes slide-in {
+    0% {
+        opacity: 0;
+        transform: translateY(40px); }
+    30% {
+        opacity: 1;
+        transform: translateY(0px); } }
+
+@keyframes pulse {
+    0% {
+        transform: scale(1); }
+    10% {
+        transform: scale(1.1); }
+    20% {
+        transform: scale(1); } }
+
+.dropzone {
+    box-sizing: border-box;
+    min-height: 9.75rem;
+    padding: .5rem;
+    border: 2px dashed #ced4da;
+    border-radius: 0.3rem;
+    background: transparent;
+    }
+.dropzone * {
+    box-sizing: border-box; }
+.dropzone.dz-clickable {
+    cursor: pointer; }
+.dropzone.dz-clickable * {
+    cursor: default; }
+.dropzone.dz-clickable .dz-message {
+    cursor: pointer; }
+.dropzone.dz-clickable .dz-message * {
+    cursor: pointer; }
+.dropzone.dz-started .dz-message {
+    display: none; }
+.dropzone.dz-drag-hover {
+    border-color: #28a745;
+    background: rgba(40, 167, 69, 0.15); }
+.dropzone.dz-drag-hover .dz-message {
+    opacity: .5;
+    color: #28a745; }
+.dropzone.dz-drag-hover .dz-message span:before {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2328a745' d='M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z'/%3E%3C/svg%3E"); }
+.dropzone .dz-message {
+    margin-top: 2.25rem;
+    font-size: 0.875rem;
+    text-align: center;
+    line-height: 1;
+    color: #ccc; }
+.dropzone .dz-message span:before {
+    display: block;
+    position: relative;
+    top: 0;
+    left: calc(50% - (2.5rem / 2));
+    width: 2.5rem;
+    height: 2.5rem;
+    content: "";
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ccc' d='M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z'/%3E%3C/svg%3E");
+    background-size: 2.5rem 2.5rem;
+    background-position: center center;
+    background-repeat: no-repeat; }
+.dropzone .dz-preview {
+    position: relative;
+    display: inline-block;
+    min-height: 5rem;
+    margin: .5rem;
+    vertical-align: top; }
+.dropzone .dz-preview:hover {
+    z-index: 1000; }
+.dropzone .dz-preview:hover .dz-details {
+    opacity: 1; }
+.dropzone .dz-preview.dz-file-preview .dz-image {
+    background-color: #fff; }
+.dropzone .dz-preview.dz-file-preview .dz-image:hover {
+    background-color: #007bff; }
+.dropzone .dz-preview.dz-file-preview .dz-details {
+    opacity: 1; }
+.dropzone .dz-preview.dz-image-preview {
+    background: transparent; }
+.dropzone .dz-preview.dz-image-preview .dz-details {
+    transition: opacity 200ms linear; }
+.dropzone .dz-preview .dz-remove {
+    display: block;
+    cursor: pointer;
+    border: none;
+    text-align: center; }
+.dropzone .dz-preview .dz-remove:hover {
+    text-decoration: underline; }
+.dropzone .dz-preview:hover .dz-details {
+    opacity: 1; }
+.dropzone .dz-preview .dz-details {
+    z-index: 20;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding: .5rem;
+    font-size: 0.75rem;
+    text-align: center;
+    line-height: 150%;
+    color: white;
+    opacity: 0; }
+.dropzone .dz-preview .dz-details .dz-size {
+    margin-bottom: 4.5rem;
+    font-size: 0.875rem; }
+.dropzone .dz-preview .dz-details .dz-size,
+.dropzone .dz-preview .dz-details .dz-filename {
+    white-space: nowrap; }
+.dropzone .dz-preview .dz-details .dz-size:hover:before,
+.dropzone .dz-preview .dz-details .dz-filename:hover:before {
+    content: "";
+    margin-left: -100%; }
+.dropzone .dz-preview .dz-details .dz-size:hover:after,
+.dropzone .dz-preview .dz-details .dz-filename:hover:after {
+    content: "";
+    margin-right: -100%; }
+.dropzone .dz-preview .dz-details .dz-size:hover span,
+.dropzone .dz-preview .dz-details .dz-filename:hover span {
+    padding: .125rem .375rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 0.2rem; }
+.dropzone .dz-preview .dz-details .dz-size:not(:hover),
+.dropzone .dz-preview .dz-details .dz-filename:not(:hover) {
+    overflow: hidden;
+    text-overflow: ellipsis; }
+.dropzone .dz-preview .dz-image {
+    overflow: hidden;
+    width: 7.5rem;
+    height: 7.5rem;
+    position: relative;
+    display: block;
+    z-index: 10; }
+.dropzone .dz-preview .dz-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    }
+.dropzone .dz-preview.dz-success .dz-success-mark {
+    animation: passing-through 300ms cubic-bezier(0.77, 0, 0.175, 1); }
+.dropzone .dz-preview.dz-error .dz-error-mark {
+    opacity: 1;
+    animation: slide-in 300ms cubic-bezier(0.77, 0, 0.175, 1); }
+.dropzone .dz-preview .dz-success-mark,
+.dropzone .dz-preview .dz-error-mark {
+    pointer-events: none;
+    opacity: 0;
+    z-index: 500;
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    margin-top: -1.5rem;
+    margin-left: -1.5rem; }
+.dropzone .dz-preview .dz-success-mark svg,
+.dropzone .dz-preview .dz-error-mark svg {
+    display: block;
+    width: 3rem;
+    height: 3rem; }
+.dropzone .dz-preview .dz-success-mark svg * {
+    fill: #28a745;
+    fill-opacity: 1; }
+.dropzone .dz-preview .dz-error-mark svg * {
+    fill: #dc3545;
+    fill-opacity: 1; }
+.dropzone .dz-preview.dz-processing .dz-progress {
+    opacity: 1;
+    transition: all 200ms linear; }
+.dropzone .dz-preview.dz-complete .dz-progress {
+    opacity: 0;
+    transition: opacity 400ms ease-in; }
+.dropzone .dz-preview:not(.dz-processing) .dz-progress {
+    animation: pulse 6s ease infinite; }
+.dropzone .dz-preview .dz-progress {
+    opacity: 1;
+    z-index: 1000;
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 5rem;
+    height: 1rem;
+    margin-top: -.5rem;
+    margin-left: -2.5rem;
+    border-radius: 0.2rem;
+    background: rgba(255, 255, 255, 0.6);
+    -webkit-transform: scale(1);
+    overflow: hidden; }
+.dropzone .dz-preview .dz-progress .dz-upload {
+    background: #28a745;
+    background: linear-gradient(to bottom, #28a745, #1e7d34);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    transition: width 300ms ease-in-out; }
+.dropzone .dz-preview.dz-error .dz-error-message {
+    display: block; }
+.dropzone .dz-preview.dz-error:hover .dz-error-message {
+    opacity: 1;
+    pointer-events: auto; }
+.dropzone .dz-preview .dz-error-message {
+    pointer-events: none;
+    z-index: 1000;
+    position: absolute;
+    display: block;
+    display: none;
+    top: 8rem;
+    left: -.5rem;
+    width: 8.5rem;
+    padding: .25rem .5rem;
+    border-radius: 0.25rem;
+    background: #dc3545;
+    font-size: 0.875rem;
+    color: white;
+    opacity: 0;
+    transition: opacity 300ms ease; }
+.dropzone .dz-preview .dz-error-message:after {
+    content: '';
+    position: absolute;
+    top: -.5rem;
+    left: 3.75rem;
+    width: 0;
+    height: 0;
+    border-left: .5rem solid transparent;
+    border-right: .5rem solid transparent;
+    border-bottom: 0.5rem solid #dc3545; }

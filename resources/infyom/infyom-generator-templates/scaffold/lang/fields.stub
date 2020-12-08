@@ -1,0 +1,4 @@
+'$MODEL_NAME_SNAKE$_$FIELD_NAME$' => '$FIELD_NAME_TITLE$',
+'$MODEL_NAME_SNAKE$_$FIELD_NAME$_help' => 'Insert $FIELD_NAME_TITLE$',
+'$MODEL_NAME_SNAKE$_$FIELD_NAME$_placeholder' => 'Insert $FIELD_NAME_TITLE$',
+#NewLangHere

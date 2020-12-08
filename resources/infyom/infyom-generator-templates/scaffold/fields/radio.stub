@@ -1,0 +1,10 @@
+<!-- $FIELD_NAME_TITLE$ Field -->
+<div class="form-group row ">
+  {!! Form::label('$FIELD_NAME$', trans("lang.$MODEL_NAME_SNAKE$_$FIELD_NAME$"),['class' => 'col-3 control-label text-right']) !!}
+  <div class="checkbox icheck">
+    <label class="col-9 ml-2 form-check-inline">
+      {!! Form::hidden('$FIELD_NAME$', false) !!}
+      {!! Form::radio('$FIELD_NAME$', "$VALUE$", null) !!} <span class="ml-2">$LABEL$</span>
+    </label>
+  </div>
+</div>

@@ -1,0 +1,1 @@
+$input['$RELATION_MODEL_PLURAL$'] = isset($input['$RELATION_MODEL_PLURAL$']) ? $input['$RELATION_MODEL_PLURAL$'] : [];

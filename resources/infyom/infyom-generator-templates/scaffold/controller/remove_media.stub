@@ -1,0 +1,16 @@
+    /**
+     * Remove Media of $MODEL_NAME$
+     * @param Request $request
+     */
+    public function removeMedia(Request $request)
+    {
+        $input = $request->all();
+        $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->findWithoutFail($input['id']);
+        try {
+            if($$MODEL_NAME_CAMEL$->hasMedia($input['collection'])){
+                $$MODEL_NAME_CAMEL$->getFirstMedia($input['collection'])->delete();
+            }
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+        }
+    }

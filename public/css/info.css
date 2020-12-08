@@ -1,0 +1,36 @@
+.form-group a:not(.btn),
+footer a:not(.btn),
+.card .card-header .nav-link:not(.active),
+.nav-pills .nav-link.selected,
+.breadcrumb-item > a,
+.page-link{
+    color: #148ea1 !important;
+}
+.form-group a:not(.btn):hover,
+footer a:not(.btn):hover,
+.card .card-header .nav-link:not(.active):hover ,
+.nav-pills .nav-link:not(.active):hover,
+.breadcrumb-item > a:hover,
+.page-link:hover{
+    color: #148ea1 !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected],
+.card .nav-pills .nav-link.active,
+.dropdown-menu > a.dropdown-item.active,
+.dropdown-menu > a.dropdown-item:active,
+.card .nav-pills .show > .nav-link{
+    background-color: #148ea1 !important;
+    color: white !important;
+}
+
+.page-link:focus {
+    box-shadow: 0 0 0 0.2rem rgba(20, 142, 161, 0.25);
+}
+
+.page-item.active .page-link,
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    color: #ffffff !important;
+    background-color: #148ea1;
+    border-color: #148ea1;
+}

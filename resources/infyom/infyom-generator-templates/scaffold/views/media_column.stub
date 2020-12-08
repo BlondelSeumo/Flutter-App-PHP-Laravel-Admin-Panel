@@ -1,0 +1,3 @@
+->editColumn('$FIELD_NAME$',function($$MODEL_NAME_SNAKE$){
+    return getMediaColumn($$MODEL_NAME_SNAKE$,'$FIELD_NAME$');
+})

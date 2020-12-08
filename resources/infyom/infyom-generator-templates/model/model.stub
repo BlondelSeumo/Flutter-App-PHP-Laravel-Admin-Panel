@@ -1,0 +1,68 @@
+<?php
+
+namespace $NAMESPACE_MODEL$;
+
+use $NAMESPACE_MODEL_EXTEND$ as Model;
+$SOFT_DELETE_IMPORT$
+$DOCS$
+class $MODEL_NAME$ extends Model
+{
+$SOFT_DELETE$
+    public $table = '$TABLE_NAME$';
+    $TIMESTAMPS$
+$SOFT_DELETE_DATES$
+$PRIMARY$
+    public $fillable = [
+        $FIELDS$
+    ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        $CAST$
+    ];
+
+    /**
+     * Validation rules
+     *
+     * @var array
+     */
+    public static $rules = [
+        $RULES$
+    ];
+
+    /**
+     * New Attributes
+     *
+     * @var array
+     */
+    protected $appends = [
+        'custom_fields',
+        $APPENDS$
+    ];
+
+    public function customFieldsValues()
+    {
+        return $this->morphMany('App\Models\CustomFieldValue', 'customizable');
+    }
+
+    public function getCustomFieldsAttribute()
+    {
+        $hasCustomField = in_array(static::class,setting('custom_field_models',[]));
+        if (!$hasCustomField){
+            return [];
+        }
+        $array = $this->customFieldsValues()
+            ->join('custom_fields','custom_fields.id','=','custom_field_values.custom_field_id')
+            ->where('custom_fields.in_table','=',true)
+            ->get()->toArray();
+
+        return convertToAssoc($array,'name');
+    }
+
+    $RELATIONS$
+    $RELATIONSHIP_ATTRIBUTE$
+}

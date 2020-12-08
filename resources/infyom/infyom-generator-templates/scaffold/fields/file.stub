@@ -1,0 +1,57 @@
+<!-- $FIELD_NAME_TITLE$ Field -->
+<div class="form-group row">
+  {!! Form::label('$FIELD_NAME$', trans("lang.$MODEL_NAME_SNAKE$_$FIELD_NAME$"), ['class' => 'col-3 control-label text-right']) !!}
+  <div class="col-9">
+    <div style="width: 100%" class="dropzone $FIELD_NAME$" id="$FIELD_NAME$" data-field="$FIELD_NAME$">
+      <input type="hidden" name="$FIELD_NAME$">
+    </div>
+    <a href="#loadMediaModal" data-dropzone="$FIELD_NAME$" data-toggle="modal" data-target="#mediaModal" class="btn btn-outline-{{setting('theme_color','primary')}} btn-sm float-right mt-1">{{ trans('lang.media_select')}}</a>
+    <div class="form-text text-muted w-50">
+      {{ trans("lang.$MODEL_NAME_SNAKE$_$FIELD_NAME$_help") }}
+    </div>
+  </div>
+</div>
+@prepend('scripts')
+<script type="text/javascript">
+    var $RANDOM_VARIABLE$ = '';
+    @if(isset($$MODEL_NAME_SNAKE$) && $$MODEL_NAME_SNAKE$->hasMedia('$FIELD_NAME$'))
+    $RANDOM_VARIABLE$ = {
+        name: "{!! $$MODEL_NAME_SNAKE$->getFirstMedia('$FIELD_NAME$')->name !!}",
+        size: "{!! $$MODEL_NAME_SNAKE$->getFirstMedia('$FIELD_NAME$')->size !!}",
+        type: "{!! $$MODEL_NAME_SNAKE$->getFirstMedia('$FIELD_NAME$')->mime_type !!}",
+        collection_name: "{!! $$MODEL_NAME_SNAKE$->getFirstMedia('$FIELD_NAME$')->collection_name !!}"};
+    @endif
+    var dz_$RANDOM_VARIABLE$ = $(".dropzone.$FIELD_NAME$").dropzone({
+        url: "{!!url('uploads/store')!!}",
+        addRemoveLinks: true,
+        maxFiles: 1,
+        init: function () {
+        @if(isset($$MODEL_NAME_SNAKE$) && $$MODEL_NAME_SNAKE$->hasMedia('$FIELD_NAME$'))
+            dzInit(this,$RANDOM_VARIABLE$,'{!! url($$MODEL_NAME_SNAKE$->getFirstMediaUrl('$FIELD_NAME$','thumb')) !!}')
+        @endif
+        },
+        accept: function(file, done) {
+            dzAccept(file,done,this.element,"{!!config('medialibrary.icons_folder')!!}");
+        },
+        sending: function (file, xhr, formData) {
+            dzSending(this,file,formData,'{!! csrf_token() !!}');
+        },
+        maxfilesexceeded: function (file) {
+            dz_$RANDOM_VARIABLE$[0].mockFile = '';
+            dzMaxfile(this,file);
+        },
+        complete: function (file) {
+            dzComplete(this, file, $RANDOM_VARIABLE$, dz_$RANDOM_VARIABLE$[0].mockFile);
+            dz_$RANDOM_VARIABLE$[0].mockFile = file;
+        },
+        removedfile: function (file) {
+            dzRemoveFile(
+                file, $RANDOM_VARIABLE$, '{!! url("$MODEL_NAME_PLURAL_SNAKE$/remove-media") !!}',
+                '$FIELD_NAME$', '{!! isset($$MODEL_NAME_SNAKE$) ? $$MODEL_NAME_SNAKE$->id : 0 !!}', '{!! url("uplaods/clear") !!}', '{!! csrf_token() !!}'
+            );
+        }
+    });
+    dz_$RANDOM_VARIABLE$[0].mockFile = $RANDOM_VARIABLE$;
+    dropzoneFields['$FIELD_NAME$'] = dz_$RANDOM_VARIABLE$;
+</script>
+@endprepend

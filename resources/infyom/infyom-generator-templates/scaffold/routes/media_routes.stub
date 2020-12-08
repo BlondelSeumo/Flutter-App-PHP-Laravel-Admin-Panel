@@ -1,0 +1,1 @@
+Route::post('$MODEL_NAME_PLURAL_CAMEL$/remove-media','$PATH_PREFIX$$MODEL_NAME$Controller@removeMedia');

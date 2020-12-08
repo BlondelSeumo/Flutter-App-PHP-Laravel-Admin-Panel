@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 3 | Log in</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{asset('plugins/font-awesome/css/font-awesome.min.css')}}">
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.1.2/dist/css/ionicons.min.css" rel="stylesheet">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{asset('dist/css/adminlte.css')}}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{{asset('plugins/iCheck/flat/blue.css')}}">
+  {{--<!-- Bootstrap -->--}}
+  {{--<link rel="stylesheet" href="{{asset('plugins/bootstrap/css/bootstrap.min.css')}}">--}}
+  <!-- Google Font: Poppins -->
+  <<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="{{asset('css/custom.css')}}">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Enter Email to reset password</p>
+
+      <form method="post" action="{{ url('/password/email') }}">
+        {!! csrf_field() !!}
+
+        <div class="input-group mb-3">
+          <input value="{{ old('email') }}" type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="Email" aria-label="Search">
+          <div class="input-group-append">
+            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+          </div>
+          @if ($errors->has('email'))
+          <div class="invalid-feedback">
+            {{ $errors->first('email') }}
+          </div>
+          @endif
+        </div>
+        <div class="row mb-3 ">
+          <!-- /.col -->
+          <div class="col-9 m-auto">
+            <button type="submit" class="btn btn-primary btn-block">Send Password Reset Link</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+      <p class="mb-0 text-center">
+        <a href="{{ url('/login') }}" class="text-center">I remember my password return to login</a>
+      </p>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- iCheck -->
+<script src="{{asset('plugins/iCheck/icheck.min.js')}}"></script>
+<script>
+    $(function () {
+        $('.icheck input').iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass   : 'iradio_flat-blue',
+            increaseArea : '20%' // optional
+        })
+    })
+</script>
+</body>
+</html>

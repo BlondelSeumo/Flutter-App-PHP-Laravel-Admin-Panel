@@ -1,0 +1,10 @@
+use App\Repositories\$RELATION_MODEL$Repository;
+###
+/**
+  * @var $RELATION_MODEL$Repository
+  */
+private $$RELATION_MODEL_SNAKE$Repository;
+###
+, $RELATION_MODEL$Repository $$RELATION_MODEL_SNAKE$Repo
+###
+$this->$RELATION_MODEL_SNAKE$Repository = $$RELATION_MODEL_SNAKE$Repo;

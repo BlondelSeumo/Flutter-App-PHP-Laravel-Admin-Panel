@@ -1,0 +1,16 @@
+analyzer:
+  errors:
+    # allow having TODOs in the code
+    todo: ignore
+  exclude:
+    - lib/generated
+    - lib/l10n
+
+linter:
+  rules:
+    # STYLE
+    - camel_case_types
+    - camel_case_extensions
+    - implementation_imports
+    - prefer_relative_imports
+

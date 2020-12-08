@@ -1,0 +1,5 @@
+if(isset($input['$FIELD_NAME$']) && $input['$FIELD_NAME$']){
+    $cacheUpload = $this->uploadRepository->getByUuid($input['$FIELD_NAME$']);
+    $mediaItem = $cacheUpload->getMedia('$FIELD_NAME$')->first();
+    $mediaItem->copy($$MODEL_NAME_CAMEL$, '$FIELD_NAME$');
+}

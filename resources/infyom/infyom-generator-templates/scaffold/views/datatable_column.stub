@@ -1,0 +1,5 @@
+[
+  'data' => '$FIELD_TITLE$',
+  'title' => trans('lang.$MODEL_NAME_SNAKE$_$FIELD_NAME$'),
+  $SEARCHABLE$$ORDRERABLE$$EXPORTABLE$$PRINTABLE$
+]

@@ -1,0 +1,7 @@
+<!-- $FIELD_NAME_TITLE$ Field -->
+<div class="form-group row col-6">
+  {!! Form::label('$FIELD_NAME$', '$FIELD_NAME_TITLE$:', ['class' => 'col-3 control-label text-right']) !!}
+  <div class="col-9">
+    <p>{!! $$MODEL_NAME_CAMEL$->$FIELD_NAME$ !!}</p>
+  </div>
+</div>

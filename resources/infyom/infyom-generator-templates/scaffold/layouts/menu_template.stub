@@ -1,0 +1,5 @@
+@can('$MODEL_NAME_PLURAL_CAMEL$.index')
+<li class="nav-item">
+  <a class="nav-link {{ Request::is('$MODEL_NAME_PLURAL_CAMEL$*') ? 'active' : '' }}" href="{!! route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index') !!}">@if($icons)<i class="nav-icon fa fa-file"></i>@endif<p>{{trans('lang.$MODEL_NAME_SNAKE$_plural')}}</p></a>
+</li>
+@endcan

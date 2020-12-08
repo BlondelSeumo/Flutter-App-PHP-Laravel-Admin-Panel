@@ -1,0 +1,99 @@
+<script type="text/javascript" src="{{asset('plugins/datatables/jquery.dataTables.js')}}"></script>
+<script type="text/javascript" src="{{asset('plugins/datatables/dataTables.bootstrap4.js')}}"></script>
+<script type="text/javascript" src="{{asset('plugins/datatables/buttons/dataTables.buttons.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('plugins/datatables/buttons.js') }}"></script>
+<script type="text/javascript" src="{{asset('plugins/datatables/buttons/buttons.colVis.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('plugins/datatables/buttons.server-side.js') }}"></script>
+<script type="text/javascript">
+    function initICheck(){
+        $('input[type="checkbox"].permission').on('ifCreated', function (event) {
+            var checkbox = $(this);
+            var roleId = $(this).data('role-id');
+            var permission = $(this).data('permission');
+            $.ajax({
+                method: "GET",
+                url: "{{url('permissions/role-has-permission')}}",
+                data: {roleId: roleId, permission: permission},
+                dataType: "json"
+            })
+                .done(function (msg) {
+                    if (msg.result) {
+                        checkbox.iCheck('check');
+                    }
+
+                }).always(function () {
+            });
+        });
+
+        $('.icheck input').iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue',
+            increaseArea: '20%' // optional
+        });
+
+
+        $('input[type="checkbox"].permission').on('ifClicked', function (event) {
+            var url = "";
+            var roleId = $(this).data('role-id');
+            var permission = $(this).data('permission');
+            if ($(this).parent('[class*="icheckbox"]').hasClass("checked")) {
+                url = "{{url('permissions/revoke-permission-to-role')}}";
+            } else {
+                url = "{{url('permissions/give-permission-to-role')}}";
+            }
+            $.ajax({
+                method: "POST",
+                url: url,
+                data: {_token: "{{csrf_token()}}", roleId: roleId, permission: permission}
+            })
+                .done(function (msg) {
+
+                });
+
+        });
+    }
+
+    function renderButtons(tableId) {
+
+        var dtable = $("#" + tableId).DataTable();
+        $('a#refreshDatatable').on('click', function () {
+            dtable.button('4').trigger();
+        });
+        $('a#exportCsvDatatable').on('click', function () {
+            dtable.button('1-0').trigger();
+        });
+        $('a#exportExcelDatatable').on('click', function () {
+            dtable.button('1-1').trigger();
+        });
+
+        $('a#exportPdfDatatable').on('click', function () {
+            dtable.button('1-2').trigger();
+        });
+        $('a#printDatatable').on('click', function () {
+            dtable.button('2').trigger();
+        });
+        $('a#resetDatatable').on('click', function () {
+            dtable.button('3').trigger();
+        });
+
+        $("#" + tableId + "_filter").html("<div class=\"input-group input-group-sm\">\n" +
+            "  <input type=\"text\" class=\"form-control\" placeholder=\"Search\" aria-label=\"Search\">\n" +
+            "  <div class=\"input-group-append\">\n" +
+            "    <span class=\"input-group-text\"><i class=\"fa fa-search\"></i></span>\n" +
+            "  </div>\n" +
+            "</div>");
+        $("#" + tableId + "_filter input").on('keyup', function () {
+            dtable.search(this.value).draw();
+        });
+    }
+
+    function renderiCheck(tableId){
+        initICheck();
+
+        $("#" + tableId).on( 'draw.dt', function () {
+            initICheck();
+        } );
+    }
+
+
+</script>
