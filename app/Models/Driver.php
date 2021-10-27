@@ -18,18 +18,15 @@ use Eloquent as Model;
  */
 class Driver extends Model
 {
-
     public $table = 'drivers';
     public $primaryKey = 'id';
-
-
 
     public $fillable = [
         'user_id',
         'delivery_fee',
         'total_orders',
         'earning',
-        'available'
+        'available',
     ];
 
     /**
@@ -42,7 +39,7 @@ class Driver extends Model
         'delivery_fee' => 'double',
         'total_orders' => 'integer',
         'earning' => 'double',
-        'available' => 'boolean'
+        'available' => 'boolean',
     ];
 
     /**
@@ -51,7 +48,7 @@ class Driver extends Model
      * @var array
      */
     public static $rules = [
-        'delivery_fee' => 'required'
+        'delivery_fee' => 'required',
         //'user_id' => 'required|exists:users,id'
     ];
 
@@ -62,9 +59,12 @@ class Driver extends Model
      */
     protected $appends = [
         'custom_fields',
-        
+
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     **/
     public function customFieldsValues()
     {
         return $this->morphMany('App\Models\CustomFieldValue', 'customizable');
@@ -72,16 +72,16 @@ class Driver extends Model
 
     public function getCustomFieldsAttribute()
     {
-        $hasCustomField = in_array(static::class,setting('custom_field_models',[]));
-        if (!$hasCustomField){
+        $hasCustomField = in_array(static::class, setting('custom_field_models', []));
+        if (!$hasCustomField) {
             return [];
         }
         $array = $this->customFieldsValues()
-            ->join('custom_fields','custom_fields.id','=','custom_field_values.custom_field_id')
-            ->where('custom_fields.in_table','=',true)
+            ->join('custom_fields', 'custom_fields.id', '=', 'custom_field_values.custom_field_id')
+            ->where('custom_fields.in_table', '=', true)
             ->get()->toArray();
 
-        return convertToAssoc($array,'name');
+        return convertToAssoc($array, 'name');
     }
 
     /**
@@ -91,5 +91,4 @@ class Driver extends Model
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id', 'id');
     }
-    
 }
